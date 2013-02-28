@@ -12,6 +12,7 @@ def convert(imagename, cscale):
     conv = colorscale.ReverseGrayToRGB(cscale)
     line, row = gray.shape
     from itertools import product
+    # http://stackoverflow.com/a/13004147
     for pos in product(range(line), range(row)):
         rgb = (img.item(pos+(2,)), img.item(pos+(1,)), img.item(pos+(0,)))
         gray[pos] = conv(rgb)
