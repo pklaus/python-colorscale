@@ -9,7 +9,7 @@ import argparse
 def convert(imagename, cscale):
     img = cv2.imread(imagename)
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    conv = colorscale.ReverseGreyToRGB(cscale)
+    conv = colorscale.ReverseGrayToRGB(cscale)
     line, row = gray.shape
     from itertools import product
     for pos in product(range(line), range(row)):

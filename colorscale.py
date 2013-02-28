@@ -25,7 +25,7 @@ class RGBValue(object):
         self.red = red
         self.green = green
         self.blue = blue
-    def to_grey(self):
+    def to_gray(self):
         print int((self.red+self.green+self.blue)/3.)
     def __str__(self):
         return "RGB value: (%d, %d, %d)" % (self.red, self.green, self.blue)
@@ -36,25 +36,25 @@ def bgr_to_rgb(bgr):
     """ Values in ndarrays are stored as BGR. """
     return (bgr[2], bgr[1], bgr[0])
 
-class GreyToRGB(object):
+class GrayToRGB(object):
     def __init__(self, palette, min=0, max=255):
         self.palette = palette
         self.min = min
         self.max = max
         self.lut = dict()
-    def __call__(self, grey_value):
+    def __call__(self, gray_value):
         try:
-            return self.lut[grey_value]
+            return self.lut[gray_value]
         except KeyError:
-            self.lut[grey_value] = self.convert_grey_to_rgb(grey_value)
-            return self.lut[grey_value]
+            self.lut[gray_value] = self.convert_gray_to_rgb(gray_value)
+            return self.lut[gray_value]
     
-    def convert_grey_to_rgb(self, grey_value):
+    def convert_gray_to_rgb(self, gray_value):
         pal = self.palette
         min, max = self.min, self.max
-        if grey_value == max: return RGBValue(max, max, max)
-        if grey_value < min or grey_value > max: raise ValueError('grey value must be in the limits of %d to %d.' % (min, max))
-        percentage = float(grey_value)/(2**8-1)
+        if gray_value == max: return RGBValue(max, max, max)
+        if gray_value < min or gray_value > max: raise ValueError('gray value must be in the limits of %d to %d.' % (min, max))
+        percentage = float(gray_value)/(2**8-1)
         stop = 0
         while stop < len(pal.stops)-1 and percentage >= pal.stops[stop]:
             stop += 1
@@ -79,13 +79,13 @@ class GreyToRGB(object):
         return rgbval
 
 #import numpy
-class ReverseGreyToRGB(object):
+class ReverseGrayToRGB(object):
     def __init__(self, palette, min=0, max=255):
         self.palette = palette
         extent = max-min+1
         self.lut = dict()
         #numpy.zeros((extent, extent, extent), dtype=numpy.int)
-        conv = GreyToRGB(palette, min=min, max=max)
+        conv = GrayToRGB(palette, min=min, max=max)
         for i in range(min, max+1):
             rgb = conv(i)
             rgb = (rgb.red, rgb.green, rgb.blue)
