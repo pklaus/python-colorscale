@@ -31,6 +31,16 @@ class RGBValue(object):
         return "RGB value: (%d, %d, %d)" % (self.red, self.green, self.blue)
     def __iter__(self):
         for color in (self.red, self.green, self.blue): yield color
+    def __getitem__(self, index):
+        if index not in [0,1,2]: raise KeyError('Index must be 0, 1 or 2')
+        if index == 0: return self.red
+        if index == 1: return self.green
+        if index == 2: return self.blue
+    def __setitem__(self, index, value) :
+        if index not in [0,1,2]: raise KeyError('Index must be 0, 1 or 2')
+        if index == 0: self.red = value
+        if index == 1: self.green = value
+        if index == 2: self.blue = value
 
 def bgr_to_rgb(bgr):
     """ Values in ndarrays are stored as BGR. """
