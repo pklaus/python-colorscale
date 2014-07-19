@@ -88,6 +88,11 @@ class GrayToRGB(object):
         rgbval = RGBValue(red, green, blue)
         return rgbval
 
+class GrayToBGR(GrayToRGB):
+    def __call__(self, gray_value):
+        rgb = GrayToRGB.__call__(self, gray_value)
+        return (rgb[2], rgb[1], rgb[0])
+
 #import numpy
 class ReverseGrayToRGB(object):
     def __init__(self, palette, min=0, max=255):
