@@ -26,7 +26,7 @@ class RGBValue(object):
         self.green = green
         self.blue = blue
     def to_gray(self):
-        print int((self.red+self.green+self.blue)/3.)
+        return int(round((self.red+self.green+self.blue)/3.))
     def __str__(self):
         return "RGB value: (%d, %d, %d)" % (self.red, self.green, self.blue)
     def __iter__(self):
