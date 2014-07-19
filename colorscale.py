@@ -30,7 +30,7 @@ class RGBValue(object):
     def __str__(self):
         return "RGB value: (%d, %d, %d)" % (self.red, self.green, self.blue)
     def __iter__(self):
-        return (self.red, self.green, self.blue)
+        for color in (self.red, self.green, self.blue): yield color
 
 def bgr_to_rgb(bgr):
     """ Values in ndarrays are stored as BGR. """
