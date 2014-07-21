@@ -52,6 +52,27 @@ class GrayToRGB(object):
         self.min = min
         self.max = max
         self.lut = dict()
+        self.lutr = dict()
+        self.lutg = dict()
+        self.lutb = dict()
+    def get_red(self, gray_value):
+        try:
+            return self.lutr[gray_value]
+        except KeyError:
+            self.lutr[gray_value] = self.convert_gray_to_rgb(gray_value)[0]
+            return self.lutr[gray_value]
+    def get_green(self, gray_value):
+        try:
+            return self.lutg[gray_value]
+        except KeyError:
+            self.lutg[gray_value] = self.convert_gray_to_rgb(gray_value)[1]
+            return self.lutg[gray_value]
+    def get_blue(self, gray_value):
+        try:
+            return self.lutb[gray_value]
+        except KeyError:
+            self.lutb[gray_value] = self.convert_gray_to_rgb(gray_value)[2]
+            return self.lutb[gray_value]
     def __call__(self, gray_value):
         try:
             return self.lut[gray_value]
