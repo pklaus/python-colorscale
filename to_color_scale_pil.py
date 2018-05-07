@@ -11,8 +11,10 @@ from itertools import product
 class ConversionError(NameError):
     pass
 
-def convert(imagename, cscale):
-    img = Image.open(imagename)
+def open_image(imagename):
+    return Image.open(imagename)
+
+def convert(img, cscale):
     if 1 in img.size: raise NotImplementedError()
     data = np.asarray( img, dtype="uint8" )
     if data.ndim != 2: raise ConversionError("Are you sure, this is a grayscale image? - 'cause I don't think so.")
@@ -28,7 +30,16 @@ def convert(imagename, cscale):
     #color[:, :, 2] = cblue(data)
     color = np.dstack((cred(data).astype(data.dtype), cgreen(data).astype(data.dtype), cblue(data).astype(data.dtype)))
     img = Image.fromarray(color)
-    img.save(add_to_file_name(imagename, '_color'))
+    return img
+
+def save_img_as(img, new_filename):
+    img.save(new_filename)
+
+def convert_and_save(imagename, cscale):
+    """ convenience function """
+    img = open_image(imagename)
+    img = convert(img, cscale)
+    save_img_as(img, add_to_file_name(imagename, '_color'))
 
 def add_to_file_name(old_name, addition):
     fragments = path.splitext(old_name)
@@ -42,4 +53,4 @@ if __name__ == '__main__':
     parser.add_argument('imagename', metavar='IMAGEFILE', help='The image to convert')
     parser.add_argument('-s', '--colorscale', help='Choose from: %s'%palettes.keys(), required=True)
     args = parser.parse_args()
-    convert(args.imagename, palettes[args.colorscale])
+    convert_and_save(args.imagename, palettes[args.colorscale])
