@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
  
-import cv2
 import colorscale
+
+import cv2
 
 def open_image(imagename):
     return cv2.imread(imagename, -1)

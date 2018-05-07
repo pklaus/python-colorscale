@@ -1,8 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
  
-import cv2
 import colorscale
+
+import cv2
+
+from itertools import product
 from os import path
 import argparse
 
@@ -11,7 +14,6 @@ def convert(imagename, cscale):
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     conv = colorscale.ReverseGrayToRGB(cscale)
     line, row = gray.shape
-    from itertools import product
     # http://stackoverflow.com/a/13004147
     for pos in product(range(line), range(row)):
         rgb = (img.item(pos+(2,)), img.item(pos+(1,)), img.item(pos+(0,)))

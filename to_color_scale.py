@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
  
 import colorscale
+
 from os import path
 import argparse
 
