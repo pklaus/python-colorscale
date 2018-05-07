@@ -2,11 +2,8 @@
 # -*- coding: utf-8 -*-
  
 import colorscale
-from os import path
-import argparse
 from PIL import Image
 import numpy as np
-from itertools import product
 
 class ConversionError(NameError):
     pass
@@ -34,23 +31,3 @@ def convert(img, cscale):
 
 def save_img_as(img, new_filename):
     img.save(new_filename)
-
-def convert_and_save(imagename, cscale):
-    """ convenience function """
-    img = open_image(imagename)
-    img = convert(img, cscale)
-    save_img_as(img, add_to_file_name(imagename, '_color'))
-
-def add_to_file_name(old_name, addition):
-    fragments = path.splitext(old_name)
-    return fragments[0] + addition + fragments[1]
-
-palettes = dict()
-palettes['tillscale'] = colorscale.TillPalette()
-
-if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Convert an image saved as false color to grayscale')
-    parser.add_argument('imagename', metavar='IMAGEFILE', help='The image to convert')
-    parser.add_argument('-s', '--colorscale', help='Choose from: %s'%palettes.keys(), required=True)
-    args = parser.parse_args()
-    convert_and_save(args.imagename, palettes[args.colorscale])
