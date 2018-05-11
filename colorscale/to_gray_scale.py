@@ -27,9 +27,11 @@ def add_to_file_name(old_name, addition):
 palettes = dict()
 palettes['tillscale'] = colorscale.TillPalette()
 
-if __name__ == '__main__':
+def main():
     parser = argparse.ArgumentParser(description='Convert an image saved as false color to grayscale')
     parser.add_argument('imagename', metavar='IMAGEFILE', help='The image to convert')
     parser.add_argument('-s', '--colorscale', help='Choose from: %s'%palettes.keys(), required=True)
     args = parser.parse_args()
     convert(args.imagename, palettes[args.colorscale])
+
+if __name__ == '__main__': main()

@@ -9,9 +9,9 @@ import argparse
 def convert_and_save(imagename, cscale, backend=None):
     """ convenience function """
     if backend == 'pil':
-        from to_color_scale_pil import open_image, convert, save_img_as
+        from .to_color_scale_pil import open_image, convert, save_img_as
     elif backend == 'cv2':
-        from to_color_scale_cv2 import open_image, convert, save_img_as
+        from .to_color_scale_cv2 import open_image, convert, save_img_as
     else:
         raise NotImplementedError('No such backend: ' + backend)
     img = open_image(imagename)
@@ -26,10 +26,12 @@ palettes = {
   'tillscale': colorscale.TillPalette(),
 }
 
-if __name__ == '__main__':
+def main():
     parser = argparse.ArgumentParser(description='Convert an image saved as false color to grayscale')
     parser.add_argument('imagename', metavar='IMAGEFILE', help='The image to convert')
     parser.add_argument('-s', '--colorscale', choices=palettes.keys(), required=True)
     parser.add_argument('-b', '--backend', choices=('pil', 'cv2'), default='pil')
     args = parser.parse_args()
     convert_and_save(args.imagename, palettes[args.colorscale], backend=args.backend)
+
+if __name__ == '__main__': main()
