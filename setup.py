@@ -5,10 +5,19 @@ try:
 except ImportError:
     from distutils.core import setup
 
+try:
+    import pypandoc
+    LDESC = open('README.md', 'r').read()
+    LDESC = pypandoc.convert(LDESC, 'rst', format='md')
+except (ImportError, IOError, RuntimeError) as e:
+    print("Could not create long description:")
+    print(str(e))
+    LDESC = ''
+
 setup(name='colorscale',
       version = '0.8.dev0',
       description = 'Python package to convert images from grayscale to false color and back',
-      long_description = '',
+      long_description = LDESC,
       author = 'Philipp Klaus',
       author_email = 'philipp.l.klaus@web.de',
       url = 'https://github.com/pklaus/python_colorscale',
