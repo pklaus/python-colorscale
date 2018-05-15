@@ -29,7 +29,7 @@ palettes = {
 def main():
     parser = argparse.ArgumentParser(description='Convert an image saved as false color to grayscale')
     parser.add_argument('imagename', metavar='IMAGEFILE', help='The image to convert')
-    parser.add_argument('-s', '--colorscale', choices=palettes.keys(), required=True)
+    parser.add_argument('-s', '--colorscale', choices=palettes.keys(), help='Desired color scale', required=True)
     parser.add_argument('-b', '--backend', choices=('pil', 'cv2'), default='pil')
     args = parser.parse_args()
     convert_and_save(args.imagename, palettes[args.colorscale], backend=args.backend)

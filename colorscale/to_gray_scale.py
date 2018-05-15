@@ -30,7 +30,7 @@ palettes['tillscale'] = colorscale.TillPalette()
 def main():
     parser = argparse.ArgumentParser(description='Convert an image saved as false color to grayscale')
     parser.add_argument('imagename', metavar='IMAGEFILE', help='The image to convert')
-    parser.add_argument('-s', '--colorscale', help='Choose from: %s'%palettes.keys(), required=True)
+    parser.add_argument('-s', '--colorscale', choices=palettes.keys(), help='Desired color scale', required=True)
     args = parser.parse_args()
     convert(args.imagename, palettes[args.colorscale])
 
