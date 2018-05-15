@@ -44,6 +44,11 @@ and
       -s COLORSCALE, --colorscale COLORSCALE {tillscale}
                             Desired color scale
 
+### Resources
+
+* Package in Python Package Index (PyPI): <https://pypi.org/project/colorscale/>
+* Package on Github: <https://github.com/pklaus/python_colorscale>
+
 ### Author
 
 * Philipp Klaus  
