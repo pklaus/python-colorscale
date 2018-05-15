@@ -44,6 +44,16 @@ and
       -s COLORSCALE, --colorscale COLORSCALE {tillscale}
                             Desired color scale
 
+### ToDo
+
+It is desirable (and on the ToDo list) to make this package work with the colormaps built into matplotlib.
+Here's a list of the relevant matplotlib documentation pages:
+
+* [List of matplotlib colormaps](https://matplotlib.org/examples/color/colormaps_reference.html)
+* [Builtin colormaps module `matplotlib.cm`](https://matplotlib.org/api/cm_api.html)
+* [base class `matplotlib.colors.Colormap`](https://matplotlib.org/api/_as_gen/matplotlib.colors.Colormap.html#matplotlib.colors.Colormap)
+* [Colormaps tutorial (in-depth discussion about colormaps, including colorblind-friendliness)](https://matplotlib.org/tutorials/colors/colormaps.html)
+
 ### Resources
 
 * Package in Python Package Index (PyPI): <https://pypi.org/project/colorscale/>
